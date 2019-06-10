@@ -16,7 +16,34 @@ class ViewController: UIViewController {
     }
 
     @IBAction func sendGetRequest(_ sender: Any) {
-        RequestManager.getPosts()
+        RequestManager.getPosts(with: 1) { posts in
+            print(posts)
+            
+            DispatchQueue.main.async {
+                // update UI, так как этот clousure вызвался не на главной очереди
+            }
+        }
+    }
+    
+    @IBAction func getUsrsersAction() {
+        RequestManager.getUsers { (users) in
+            print(users)
+            
+            DispatchQueue.main.async {
+                // update UI
+                 // update UI
+            }
+        }
+    }
+    
+    @IBAction func createPostAction() {
+        let post = Post()
+        post.id = 321
+        post.userId = 1
+        post.body = "body title"
+        post.title = "title string"
+        
+        RequestManager.createPost(post)
     }
     
 }

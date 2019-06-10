@@ -19,23 +19,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ps7-lg-KfK">
-                                <rect key="frame" x="162" y="438" width="90" height="30"/>
-                                <state key="normal" title="GET Request"/>
+                                <rect key="frame" x="171.5" y="438" width="71" height="30"/>
+                                <state key="normal" title="GET Posts"/>
                                 <connections>
                                     <action selector="sendGetRequest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fPD-Gs-vIj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FsG-KW-53I">
+                                <rect key="frame" x="172.5" y="358" width="69" height="30"/>
+                                <state key="normal" title="Get Users"/>
+                                <connections>
+                                    <action selector="getUsrsersAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="jYP-9V-2u6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nMM-1H-xoc">
+                                <rect key="frame" x="170" y="278" width="74" height="30"/>
+                                <state key="normal" title="POST post"/>
+                                <connections>
+                                    <action selector="createPostAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="50t-hN-x5o"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Ps7-lg-KfK" firstAttribute="top" secondItem="FsG-KW-53I" secondAttribute="bottom" constant="50" id="KAy-Sw-u1R"/>
+                            <constraint firstItem="FsG-KW-53I" firstAttribute="centerX" secondItem="Ps7-lg-KfK" secondAttribute="centerX" id="eYf-el-0ks"/>
                             <constraint firstItem="Ps7-lg-KfK" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="jbJ-NA-2k7"/>
                             <constraint firstItem="Ps7-lg-KfK" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="jsG-SP-MQU"/>
+                            <constraint firstItem="nMM-1H-xoc" firstAttribute="centerX" secondItem="FsG-KW-53I" secondAttribute="centerX" id="lxI-f8-hCW"/>
+                            <constraint firstItem="FsG-KW-53I" firstAttribute="top" secondItem="nMM-1H-xoc" secondAttribute="bottom" constant="50" id="qFK-9L-2pW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="124.55357142857142"/>
         </scene>
     </scenes>
 </document>
