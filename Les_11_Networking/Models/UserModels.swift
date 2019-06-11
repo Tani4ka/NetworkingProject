@@ -11,7 +11,7 @@ import Foundation
 class User: Codable {
     var id: Int?
     var name: String?
-    var userName: String?
+    var username: String?
     var email: String?
     var address: UserAddress?
     var phone: String?

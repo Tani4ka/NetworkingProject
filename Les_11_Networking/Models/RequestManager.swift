@@ -12,12 +12,10 @@ import Foundation
     
     // getPosts
     class func getPosts(with userId: Int = 1, completionHandler: @escaping ([Post]) -> Void) {
+    
+        guard let url = URL(string: Constants.Networking.posts) else { return }
         
-        let path = "http://jsonplaceholder.typicode.com/posts"
-        
-        guard let url = URL(string: path) else { return }
-        
-        // работа с query параметрами http://jsonplaceholder.typicode.com/posts/.....
+        // работа с query параметрами
         var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
         components?.queryItems = [URLQueryItem(name: "userId", value: String(userId))]
         
@@ -36,11 +34,11 @@ import Foundation
                 // если в do try будет ошибка то код перепрыгнет в catch не выполняя следующие строки
                 do {
                     // для проверки переводим данные в строку и смотрим правильный ли формат
-                    let string = String(data: jsonData, encoding: String.Encoding.utf8)
+                    _ = String(data: jsonData, encoding: String.Encoding.utf8)
 //                    print(string)
-                    let posts = try JSONDecoder().decode([Post].self, from: jsonData)
+                    let getPosts = try JSONDecoder().decode([Post].self, from: jsonData)
 //                    print(posts)
-                    completionHandler(posts)
+                    completionHandler(getPosts)
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -68,8 +66,8 @@ import Foundation
                 print("Data: \(jsonData)")
                 
                 do {
-                    let users = try JSONDecoder().decode([User].self, from: jsonData)
-                    completionHandler(users)
+                    let getUsers = try JSONDecoder().decode([User].self, from: jsonData)
+                    completionHandler(getUsers)
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -79,9 +77,12 @@ import Foundation
     }
     
     // comments
-    class func getComments(completionHandler: @escaping ([Comment]) -> Void) {
+    class func getComments(with postID: Int, completionHandler: @escaping ([Comment]) -> Void) {
         
         guard let url = URL(string: Constants.Networking.comments) else { return }
+        
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        components?.queryItems = [URLQueryItem(name: "postId", value: String(postID))]
         
         let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
             
