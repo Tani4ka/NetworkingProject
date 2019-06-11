@@ -39,11 +39,20 @@
                                     <action selector="createPostAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="50t-hN-x5o"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CKd-G0-cdm">
+                                <rect key="frame" x="153" y="518" width="108" height="30"/>
+                                <state key="normal" title="GET Comments"/>
+                                <connections>
+                                    <action selector="getCommentsAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="bVy-Bg-29E"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="CKd-G0-cdm" firstAttribute="top" secondItem="Ps7-lg-KfK" secondAttribute="bottom" constant="50" id="EGa-mh-3Sh"/>
                             <constraint firstItem="Ps7-lg-KfK" firstAttribute="top" secondItem="FsG-KW-53I" secondAttribute="bottom" constant="50" id="KAy-Sw-u1R"/>
                             <constraint firstItem="FsG-KW-53I" firstAttribute="centerX" secondItem="Ps7-lg-KfK" secondAttribute="centerX" id="eYf-el-0ks"/>
+                            <constraint firstItem="CKd-G0-cdm" firstAttribute="centerX" secondItem="Ps7-lg-KfK" secondAttribute="centerX" id="iyj-AY-9a7"/>
                             <constraint firstItem="Ps7-lg-KfK" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="jbJ-NA-2k7"/>
                             <constraint firstItem="Ps7-lg-KfK" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="jsG-SP-MQU"/>
                             <constraint firstItem="nMM-1H-xoc" firstAttribute="centerX" secondItem="FsG-KW-53I" secondAttribute="centerX" id="lxI-f8-hCW"/>

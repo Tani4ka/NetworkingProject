@@ -51,7 +51,7 @@ import Foundation
         dataTask.resume()
     }
     
-    // users
+    // getUsers
     class func getUsers(completionHandler: @escaping ([User]) -> Void) {
         
         let path = "http://jsonplaceholder.typicode.com/users"
@@ -78,10 +78,35 @@ import Foundation
         dataTask.resume()
     }
     
+    // comments
+    class func getComments(completionHandler: @escaping ([Comment]) -> Void) {
+        
+        guard let url = URL(string: Constants.Networking.comments) else { return }
+        
+        let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            if let unwrapError = error {
+                print("Error - \(unwrapError.localizedDescription)")
+            } else if let jsonData = data ,
+                let getResponse = response as? HTTPURLResponse,
+                getResponse.statusCode == 200 {
+                print("Data: \(jsonData)")
+                
+                do {
+                    let comments = try JSONDecoder().decode([Comment].self, from: jsonData)
+                    completionHandler(comments)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        dataTask.resume()
+    }
+    
     // createPost
     class func createPost(_ post: Post) {
         
-        guard let url = URL(string: Constants.Networking.postsURL) else { return }
+        guard let url = URL(string: Constants.Networking.posts) else { return }
         
         guard let data = try? JSONEncoder().encode(post) else { return }
         

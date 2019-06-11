@@ -15,8 +15,9 @@ struct Constants {
         private init () {}
         
         static let baseServerURL = "http://jsonplaceholder.typicode.com"
-        static let postsURL = baseServerURL + "/posts"
+        static let posts = baseServerURL + "/posts"
         static let users = baseServerURL + "/users"
+        static let comments = baseServerURL + "/comments"
     }
     
     struct UI {

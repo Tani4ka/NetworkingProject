@@ -12,7 +12,6 @@ class ViewController: UIViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 
     @IBAction func sendGetRequest(_ sender: Any) {
@@ -30,8 +29,7 @@ class ViewController: UIViewController {
             print(users)
             
             DispatchQueue.main.async {
-                // update UI
-                 // update UI
+                // update UI, так как этот clousure вызвался не на главной очереди
             }
         }
     }
@@ -44,7 +42,17 @@ class ViewController: UIViewController {
         post.title = "title string"
         
         RequestManager.createPost(post)
+        print("Send a POST post")
     }
     
+    @IBAction func getCommentsAction() {
+        RequestManager.getComments { (comments) in
+            print(comments)
+            
+            DispatchQueue.main.async {
+                // update UI, так как этот clousure вызвался не на главной очереди
+            }
+        }
+    }
 }
 
