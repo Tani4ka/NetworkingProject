@@ -21,6 +21,7 @@ class ImageModel {
     private(set) var image: UIImage?
     
     func imageLoading(path: String) -> UIImage? {
+//        print("Enter to imageLoading")
         if !path.isEmpty,
             let url = URL(string: path),
             let data = try? Data(contentsOf: url),
@@ -28,6 +29,7 @@ class ImageModel {
             
             return image
         }
+      
         return nil
     }
     

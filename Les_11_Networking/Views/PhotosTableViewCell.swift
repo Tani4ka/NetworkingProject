@@ -21,11 +21,14 @@ class PhotosTableViewCell: UITableViewCell {
             if let path = imagePath {
                 DispatchQueue.global(qos: .userInitiated).async {
                     let imageModel = ImageModel(imagePath: path)
+                    
                     if path == self.imagePath {
                         DispatchQueue.main.async {
                             self.photosView.image = imageModel.image
                             self.activityView.stopAnimating()
                         }
+                    } else {
+                        print("path == self.image")
                     }
                 }
             }
@@ -34,13 +37,10 @@ class PhotosTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }
