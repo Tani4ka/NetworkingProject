@@ -43,7 +43,8 @@ class UsersViewController: UIViewController {
     }
 }
 
-extension UsersViewController: UITableViewDelegate, UITableViewDataSource {
+extension UsersViewController: UserTableViewCellDelegate, UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
     }
@@ -52,30 +53,53 @@ extension UsersViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserTableViewCellID", for: indexPath) as! UserTableViewCell
 
-        cell.userNameLabel.text = users[indexPath.row].username
+        cell.userNameLabel.text = users[indexPath.row].name
+        cell.delegate = self
+        
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 40
+//    }
+    
+    func postsDidTap() {
         if let postsVC = navigationController?.storyboard?.instantiateViewController(withIdentifier: "postsViewControllerID") as? PostsViewController {
             
-            postsVC.user = users[indexPath.row]
+//            postsVC.user = users[indexPath.row]
+//            postsVC.title = users[indexPath.row].name
             
-            postsVC.title = "Posts View Controller"
-       
+            postsVC.user = users[0]
+            postsVC.title = "Posts " + users[0].name!
             
             navigationController?.pushViewController(postsVC, animated: true)
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
+    func albumsDidTap() {
+        if let albumsVC = navigationController?.storyboard?.instantiateViewController(withIdentifier: "AlbumsViewControllerID") as? AlbumsViewController {
+            
+            albumsVC.user = users[0]
+            albumsVC.title = "Albums " + users[0].name!
+            
+            navigationController?.pushViewController(albumsVC, animated: true)
+        }
     }
     
-
+    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //
+    //        if let postsVC = navigationController?.storyboard?.instantiateViewController(withIdentifier: "postsViewControllerID") as? PostsViewController {
+    //
+    //            postsVC.user = users[indexPath.row]
+    //            postsVC.title = users[indexPath.row].name
+    //
+    //            navigationController?.pushViewController(postsVC, animated: true)
+    //        }
+    //    }
 }
 
+
+    
 
 
 //    @IBAction func getUsrsersAction() {

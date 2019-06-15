@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		563CDBF222B3E881009C0C41 /* AlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563CDBF122B3E881009C0C41 /* AlbumsViewController.swift */; };
 		563E81B122AE5E2B002370ED /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E81B022AE5E2B002370ED /* Constants.swift */; };
 		56422C9A22A7B6C0003363AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56422C9922A7B6C0003363AB /* AppDelegate.swift */; };
 		56422C9C22A7B6C0003363AB /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56422C9B22A7B6C0003363AB /* UsersViewController.swift */; };
@@ -20,9 +21,13 @@
 		56427A5022AFF05C0069CBD9 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56427A4F22AFF05C0069CBD9 /* PostsViewController.swift */; };
 		56427A5222AFF41A0069CBD9 /* PostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56427A5122AFF41A0069CBD9 /* PostsTableViewCell.swift */; };
 		56427A5622B012C60069CBD9 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56427A5522B012C60069CBD9 /* CommentsViewController.swift */; };
+		564CFAA222B557AE00E9C2D1 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CFAA122B557AE00E9C2D1 /* PhotosViewController.swift */; };
+		564CFAA422B560AE00E9C2D1 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CFAA322B560AE00E9C2D1 /* ImageModel.swift */; };
+		564CFAA822B5642700E9C2D1 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CFAA722B5642700E9C2D1 /* PhotosTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		563CDBF122B3E881009C0C41 /* AlbumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsViewController.swift; sourceTree = "<group>"; };
 		563E81B022AE5E2B002370ED /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		56422C9622A7B6C0003363AB /* Les_11_Networking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Les_11_Networking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56422C9922A7B6C0003363AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +43,9 @@
 		56427A4F22AFF05C0069CBD9 /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
 		56427A5122AFF41A0069CBD9 /* PostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsTableViewCell.swift; sourceTree = "<group>"; };
 		56427A5522B012C60069CBD9 /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		564CFAA122B557AE00E9C2D1 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		564CFAA322B560AE00E9C2D1 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		564CFAA722B5642700E9C2D1 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +95,7 @@
 				56422CAE22A7D855003363AB /* Post.swift */,
 				56422CB322A7D966003363AB /* UserModels.swift */,
 				563E81B022AE5E2B002370ED /* Constants.swift */,
+				564CFAA322B560AE00E9C2D1 /* ImageModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -97,6 +106,8 @@
 				56422C9B22A7B6C0003363AB /* UsersViewController.swift */,
 				56427A4F22AFF05C0069CBD9 /* PostsViewController.swift */,
 				56427A5522B012C60069CBD9 /* CommentsViewController.swift */,
+				563CDBF122B3E881009C0C41 /* AlbumsViewController.swift */,
+				564CFAA122B557AE00E9C2D1 /* PhotosViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -116,6 +127,7 @@
 			children = (
 				56427A4D22AFB6880069CBD9 /* UserTableViewCell.swift */,
 				56427A5122AFF41A0069CBD9 /* PostsTableViewCell.swift */,
+				564CFAA722B5642700E9C2D1 /* PhotosTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -194,12 +206,16 @@
 				56422CAC22A7B9B4003363AB /* RequestManager.swift in Sources */,
 				56422C9C22A7B6C0003363AB /* UsersViewController.swift in Sources */,
 				56427A5622B012C60069CBD9 /* CommentsViewController.swift in Sources */,
+				563CDBF222B3E881009C0C41 /* AlbumsViewController.swift in Sources */,
 				56427A4E22AFB6880069CBD9 /* UserTableViewCell.swift in Sources */,
 				56422CB422A7D966003363AB /* UserModels.swift in Sources */,
 				56427A5022AFF05C0069CBD9 /* PostsViewController.swift in Sources */,
 				56422C9A22A7B6C0003363AB /* AppDelegate.swift in Sources */,
+				564CFAA822B5642700E9C2D1 /* PhotosTableViewCell.swift in Sources */,
 				56427A5222AFF41A0069CBD9 /* PostsTableViewCell.swift in Sources */,
+				564CFAA222B557AE00E9C2D1 /* PhotosViewController.swift in Sources */,
 				56422CAF22A7D855003363AB /* Post.swift in Sources */,
+				564CFAA422B560AE00E9C2D1 /* ImageModel.swift in Sources */,
 				563E81B122AE5E2B002370ED /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

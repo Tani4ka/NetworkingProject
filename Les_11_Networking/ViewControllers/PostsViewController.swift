@@ -51,9 +51,14 @@ extension PostsViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = postsTableView.dequeueReusableCell(withIdentifier: "PostsViewControllerCellID", for: indexPath) as! PostsTableViewCell
         
         cell.postsLabel.text = posts[indexPath.row].title
+//        print(cell.frame.height)
         
         return cell
     }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 60
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -61,7 +66,6 @@ extension PostsViewController: UITableViewDataSource, UITableViewDelegate {
             
             commentsVC.title = "Comments View Controller"
             commentsVC.postID =  posts[indexPath.row].id
-            
             
             navigationController?.pushViewController(commentsVC, animated: true)
         }

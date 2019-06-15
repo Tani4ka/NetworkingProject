@@ -18,9 +18,9 @@ class CommentsViewController: UIViewController {
         }
     }
     
-    public var postID: Int?
+    public var postID: Int?    
     
-    
+    // MARK: - LifeCycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -35,6 +35,7 @@ class CommentsViewController: UIViewController {
 
 extension CommentsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return comments.count
     }
     
@@ -47,8 +48,8 @@ extension CommentsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
         cell.detailTextLabel?.text = comments[indexPath.row].body
         cell.detailTextLabel?.numberOfLines = 0
+        
         return cell
-    }
-    
+    }    
     
 }

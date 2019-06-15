@@ -45,3 +45,17 @@ class Comment: Codable {
     var email: String?
     var body: String?
 }
+
+class Albums: Codable {
+    var userId: Int?
+    var id: Int?
+    var title: String?
+}
+
+class Photos: Codable {
+    var albumId: Int?
+    var id: Int?
+    var title: String?
+    var url: String?
+    var thumbnailUrl: String?
+}

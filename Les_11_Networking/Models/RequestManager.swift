@@ -10,6 +10,32 @@ import Foundation
  
  class RequestManager {
     
+    // createPost
+    class func createPost(_ post: Post) {
+        
+        guard let url = URL(string: Constants.Networking.posts) else { return }
+        
+        guard let data = try? JSONEncoder().encode(post) else { return }
+        
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("\(data.count)", forHTTPHeaderField: "Content-Lenth")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // task загрузит данные на сервер, сделает POST
+        // .uploadTask - чтобы загрузить файл или картинку
+        // .dataTask - чтобы отправить json с POST
+        let task = URLSession.shared.uploadTask(with: request as URLRequest, from: data)
+        
+        // чтобы проверить в коде ответ метода POST
+        //        request.httpBody = data
+        //        let dataTask = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
+        //            // error? response?
+        //        }
+        
+        task.resume()
+    }
+    
     // getPosts
     class func getPosts(with userId: Int = 1, completionHandler: @escaping ([Post]) -> Void) {
     
@@ -49,6 +75,7 @@ import Foundation
         dataTask.resume()
     }
     
+
     // getUsers
     class func getUsers(completionHandler: @escaping ([User]) -> Void) {
         
@@ -76,7 +103,7 @@ import Foundation
         dataTask.resume()
     }
     
-    // comments
+    // getComments
     class func getComments(with postID: Int, completionHandler: @escaping ([Comment]) -> Void) {
         
         guard let url = URL(string: Constants.Networking.comments) else { return }
@@ -104,30 +131,59 @@ import Foundation
         dataTask.resume()
     }
     
-    // createPost
-    class func createPost(_ post: Post) {
+    // getAlbums
+    class func getAlbums(with userId: Int, completionHandler: @escaping ([Albums]) -> Void) {
         
-        guard let url = URL(string: Constants.Networking.posts) else { return }
+        guard let url = URL(string: Constants.Networking.albums) else { return }
         
-        guard let data = try? JSONEncoder().encode(post) else { return }
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        components?.queryItems = [URLQueryItem(name: "userId", value: String(userId))]
         
-        let request = NSMutableURLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("\(data.count)", forHTTPHeaderField: "Content-Lenth")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        // task загрузит данные на сервер, сделает POST
-        // .uploadTask - чтобы загрузить файл или картинку
-        // .dataTask - чтобы отправить json с POST
-        let task = URLSession.shared.uploadTask(with: request as URLRequest, from: data)
-        
-        // чтобы проверить в коде ответ метода POST
-//        request.httpBody = data
-//        let dataTask = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
-//            // error? response?
-//        }
-
-        task.resume()
+        let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            if let unwrapError = error {
+                print("Error - \(unwrapError.localizedDescription)")
+            } else if let jsonData = data,
+                let getResponse = response as? HTTPURLResponse,
+                getResponse.statusCode == 200 {
+                print("Data: \(jsonData)")
+                
+                do {
+                    let albums = try JSONDecoder().decode([Albums].self, from: jsonData)
+                    completionHandler(albums)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        dataTask.resume()
     }
     
+    // getPhotos
+    class func getPhotos(with albumId: Int, completionHandler: @ escaping ([Photos]) -> Void) {
+        
+        guard let url = URL(string: Constants.Networking.photos) else { return }
+        
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        components?.queryItems = [URLQueryItem(name: "albumId", value: String(albumId))]
+        
+        let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            if let unwrapError = error {
+                print("Error - \(unwrapError.localizedDescription)")
+            } else if let jsonData = data,
+                let getResponse = response as? HTTPURLResponse ,
+                getResponse.statusCode == 200 {
+                print("Data: \(jsonData)")
+                
+                do {
+                    let photos = try JSONDecoder().decode([Photos].self, from: jsonData)
+                    completionHandler(photos)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        dataTask.resume()
+    }
  }

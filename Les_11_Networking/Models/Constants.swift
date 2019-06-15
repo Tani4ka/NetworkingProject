@@ -18,6 +18,8 @@ struct Constants {
         static let posts = baseServerURL + "/posts"
         static let users = baseServerURL + "/users"
         static let comments = baseServerURL + "/comments"
+        static let albums = baseServerURL + "/albums"
+        static let photos = baseServerURL + "/photos"
     }
     
     struct UI {

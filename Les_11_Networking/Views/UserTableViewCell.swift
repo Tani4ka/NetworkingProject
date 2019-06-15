@@ -8,24 +8,24 @@
 
 import UIKit
 
+protocol UserTableViewCellDelegate: class {
+    func postsDidTap()
+    func albumsDidTap()
+}
+
 class UserTableViewCell: UITableViewCell {
 
     @IBOutlet weak var userNameLabel: UILabel!
-
+    weak var delegate: UserTableViewCellDelegate?
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBAction func postsAction(_ sender: Any) {
+        delegate?.postsDidTap()
+//        print("postsDidTap in cell")
+        
     }
     
-    func configureUsersCell(_ user: User) {
-        userNameLabel.text = user.name
+    @IBAction func albumsAction(_ sender: Any) {
+        delegate?.albumsDidTap()
+//        print("albumsDidTap in cell")
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
