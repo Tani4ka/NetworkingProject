@@ -34,6 +34,7 @@ class AlbumsViewController: UIViewController {
         
         RequestManager.getAlbums(with: user?.id ?? 0) { (getAlbums) in
             DispatchQueue.main.async {
+//                print(getAlbums.count)
                 self.albums = getAlbums
             }
         }
@@ -50,6 +51,11 @@ extension AlbumsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = albumsTableView.dequeueReusableCell(withIdentifier: "AlbumsTableViewCellID", for: indexPath) as! UITableViewCell
+        
+//        let idInt = albums[indexPath.row].id
+//        if let idStr = idInt {
+//            cell.textLabel?.text = String(idStr)
+//        }
         
         cell.textLabel?.text = albums[indexPath.row].title
         cell.textLabel?.numberOfLines = 0

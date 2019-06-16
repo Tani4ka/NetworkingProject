@@ -9,23 +9,24 @@
 import UIKit
 
 protocol UserTableViewCellDelegate: class {
-    func postsDidTap()
-    func albumsDidTap()
+    func postsDidTap(indexPath: IndexPath?)
+    func albumsDidTap(indexPath: IndexPath?)
 }
 
 class UserTableViewCell: UITableViewCell {
 
     @IBOutlet weak var userNameLabel: UILabel!
+    var indexPath: IndexPath?
     weak var delegate: UserTableViewCellDelegate?
     
     @IBAction func postsAction(_ sender: Any) {
-        delegate?.postsDidTap()
+        delegate?.postsDidTap(indexPath: indexPath)
 //        print("postsDidTap in cell")
         
     }
     
     @IBAction func albumsAction(_ sender: Any) {
-        delegate?.albumsDidTap()
+        delegate?.albumsDidTap(indexPath: indexPath)
 //        print("albumsDidTap in cell")
     }
 }

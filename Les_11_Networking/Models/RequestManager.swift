@@ -35,46 +35,6 @@ import Foundation
         
         task.resume()
     }
-    
-    // getPosts
-    class func getPosts(with userId: Int = 1, completionHandler: @escaping ([Post]) -> Void) {
-    
-        guard let url = URL(string: Constants.Networking.posts) else { return }
-        
-        // работа с query параметрами
-        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        components?.queryItems = [URLQueryItem(name: "userId", value: String(userId))]
-        
-        // заменяем if на guard, так ка у нас нету else, так логичнее, другой программист не будет искать else после if
-        guard let urlWithQuery = components?.url else { return }
-        
-        let dataTask = URLSession.shared.dataTask(with: urlWithQuery) { (data, response, error) in
-            
-            if let unwrapError = error {
-                print("Error - \(unwrapError.localizedDescription)")
-            } else if let jsonData = data ,
-                let getResponse = response as? HTTPURLResponse,
-                getResponse.statusCode == 200 {
-                print("Data: \(jsonData)")
-                
-                // если в do try будет ошибка то код перепрыгнет в catch не выполняя следующие строки
-                do {
-                    // для проверки переводим данные в строку и смотрим правильный ли формат
-                    _ = String(data: jsonData, encoding: String.Encoding.utf8)
-//                    print(string)
-                    let getPosts = try JSONDecoder().decode([Post].self, from: jsonData)
-//                    print(posts)
-                    completionHandler(getPosts)
-                } catch {
-                    print(error.localizedDescription)
-                }
-                // .decode() throws - можно использовать try? вместо do catch, но он вернет [Posts]? или nill
-                //                    let data = try? JSONDecoder().decode([Post].self, from: jsonData)
-            }
-        }
-        dataTask.resume()
-    }
-    
 
     // getUsers
     class func getUsers(completionHandler: @escaping ([User]) -> Void) {
@@ -111,7 +71,10 @@ import Foundation
         var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
         components?.queryItems = [URLQueryItem(name: "postId", value: String(postID))]
         
-        let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        // заменяем if на guard, так ка у нас нету else, так логичнее, другой программист не будет искать else после if
+        guard let urlWithQuery = components?.url else { return }
+        
+        let dataTask = URLSession.shared.dataTask(with: urlWithQuery) { (data, response, error) in
             
             if let unwrapError = error {
                 print("Error - \(unwrapError.localizedDescription)")
@@ -131,15 +94,57 @@ import Foundation
         dataTask.resume()
     }
     
+    // getPosts
+    class func getPosts(with userId: Int = 1, completionHandler: @escaping ([Post]) -> Void) {
+        
+        guard let url = URL(string: Constants.Networking.posts) else { return }
+        
+        // работа с query параметрами
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        components?.queryItems = [URLQueryItem(name: "userId", value: String(userId))]
+        
+        // заменяем if на guard, так ка у нас нету else, так логичнее, другой программист не будет искать else после if
+        guard let urlWithQuery = components?.url else { return }
+        
+        let dataTask = URLSession.shared.dataTask(with: urlWithQuery) { (data, response, error) in
+            
+            if let unwrapError = error {
+                print("Error - \(unwrapError.localizedDescription)")
+            } else if let jsonData = data ,
+                let getResponse = response as? HTTPURLResponse,
+                getResponse.statusCode == 200 {
+                print("Data: \(jsonData)")
+                
+                // если в do try будет ошибка то код перепрыгнет в catch не выполняя следующие строки
+                do {
+                    // для проверки переводим данные в строку и смотрим правильный ли формат
+                    _ = String(data: jsonData, encoding: String.Encoding.utf8)
+                    //                    print(string)
+                    let getPosts = try JSONDecoder().decode([Post].self, from: jsonData)
+                    //                    print(posts)
+                    completionHandler(getPosts)
+                } catch {
+                    print(error.localizedDescription)
+                }
+                // .decode() throws - можно использовать try? вместо do catch, но он вернет [Posts]? или nill
+                //                    let data = try? JSONDecoder().decode([Post].self, from: jsonData)
+            }
+        }
+        dataTask.resume()
+    }
+    
     // getAlbums
-    class func getAlbums(with userId: Int, completionHandler: @escaping ([Albums]) -> Void) {
+    class func getAlbums(with userId: Int = 1, completionHandler: @escaping ([Albums]) -> Void) {
         
         guard let url = URL(string: Constants.Networking.albums) else { return }
         
         var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
         components?.queryItems = [URLQueryItem(name: "userId", value: String(userId))]
         
-        let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        // заменяем if на guard, так ка у нас нету else, так логичнее, другой программист не будет искать else после if
+        guard let urlWithQuery = components?.url else { return }
+        
+        let dataTask = URLSession.shared.dataTask(with: urlWithQuery) { (data, response, error) in
             
             if let unwrapError = error {
                 print("Error - \(unwrapError.localizedDescription)")
@@ -167,7 +172,10 @@ import Foundation
         var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
         components?.queryItems = [URLQueryItem(name: "albumId", value: String(albumId))]
         
-        let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        // заменяем if на guard, так ка у нас нету else, так логичнее, другой программист не будет искать else после if
+        guard let urlWithQuery = components?.url else { return }
+        
+        let dataTask = URLSession.shared.dataTask(with: urlWithQuery) { (data, response, error) in
             
             if let unwrapError = error {
                 print("Error - \(unwrapError.localizedDescription)")

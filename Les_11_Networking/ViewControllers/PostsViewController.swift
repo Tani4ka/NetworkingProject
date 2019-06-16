@@ -34,6 +34,7 @@ class PostsViewController: UIViewController {
         
         RequestManager.getPosts(with: user?.id ?? 0) { (getPosts) in
             DispatchQueue.main.async {
+//                print(getPosts.count)
                 self.posts = getPosts
             }
         }
@@ -51,7 +52,6 @@ extension PostsViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = postsTableView.dequeueReusableCell(withIdentifier: "PostsViewControllerCellID", for: indexPath) as! PostsTableViewCell
         
         cell.postsLabel.text = posts[indexPath.row].title
-//        print(cell.frame.height)
         
         return cell
     }

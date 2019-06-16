@@ -34,10 +34,6 @@ class UsersViewController: UIViewController {
             
             DispatchQueue.main.async {
                 self.users = getUsers
-                
-//                for i in getUsers {
-//                    print("\(String(describing: i.username))")
-//                }
             }
         }
     }
@@ -54,52 +50,32 @@ extension UsersViewController: UserTableViewCellDelegate, UITableViewDelegate, U
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserTableViewCellID", for: indexPath) as! UserTableViewCell
 
         cell.userNameLabel.text = users[indexPath.row].name
+        cell.indexPath = indexPath
         cell.delegate = self
         
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 40
-//    }
-    
-    func postsDidTap() {
+    func postsDidTap(indexPath: IndexPath?) {
         if let postsVC = navigationController?.storyboard?.instantiateViewController(withIdentifier: "postsViewControllerID") as? PostsViewController {
-            
-//            postsVC.user = users[indexPath.row]
-//            postsVC.title = users[indexPath.row].name
-            
-            postsVC.user = users[0]
-            postsVC.title = "Posts " + users[0].name!
+ 
+            postsVC.user = users[indexPath?.row ?? 0]
+            postsVC.title = "Posts " + users[indexPath?.row ?? 0].name!
             
             navigationController?.pushViewController(postsVC, animated: true)
         }
     }
     
-    func albumsDidTap() {
+    func albumsDidTap(indexPath: IndexPath?) {
         if let albumsVC = navigationController?.storyboard?.instantiateViewController(withIdentifier: "AlbumsViewControllerID") as? AlbumsViewController {
             
-            albumsVC.user = users[0]
-            albumsVC.title = "Albums " + users[0].name!
+            albumsVC.user = users[indexPath?.row ?? 0]
+            albumsVC.title = "Albums " + users[indexPath?.row ?? 0].name!
             
             navigationController?.pushViewController(albumsVC, animated: true)
         }
     }
-    
-    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    //
-    //        if let postsVC = navigationController?.storyboard?.instantiateViewController(withIdentifier: "postsViewControllerID") as? PostsViewController {
-    //
-    //            postsVC.user = users[indexPath.row]
-    //            postsVC.title = users[indexPath.row].name
-    //
-    //            navigationController?.pushViewController(postsVC, animated: true)
-    //        }
-    //    }
 }
-
-
-    
 
 
 //    @IBAction func getUsrsersAction() {
@@ -129,14 +105,4 @@ extension UsersViewController: UserTableViewCellDelegate, UITableViewDelegate, U
 //
 //        RequestManager.createPost(post)
 //        print("Send a POST post")
-//    }
-//
-//    @IBAction func getCommentsAction() {
-//        RequestManager.getComments { (comments) in
-//            print(comments)
-//
-//            DispatchQueue.main.async {
-//                // update UI, так как этот clousure вызвался не на главной очереди
-//            }
-//        }
 //    }
