@@ -10,10 +10,10 @@ import UIKit
 
 struct Constants {
     private init () {} // эту структуру нельзя создать и проиницилизировать
-    
+
     struct Networking {
         private init () {}
-        
+
         static let baseServerURL = "http://jsonplaceholder.typicode.com"
         static let posts = baseServerURL + "/posts"
         static let users = baseServerURL + "/users"
@@ -21,10 +21,10 @@ struct Constants {
         static let albums = baseServerURL + "/albums"
         static let photos = baseServerURL + "/photos"
     }
-    
-    struct UI {
+
+    struct UIStruct {
         private init () {}
-        
+
         static let rightOffsetCell: CGFloat = 10.0
     }
 }

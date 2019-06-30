@@ -9,36 +9,37 @@
 import UIKit
 
 class RequestsViewController: UIViewController {
-    
+
     @IBOutlet weak var getUrlTextField: UITextField!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         getUrlTextField.delegate = self
     }
-    
 
     @IBAction func postAction() {
-        let dictionary = ["userId": 1, "id": 11, "title": "Twitter ok", "body": "I think not"] as [String: Any]
-        
+        let dictionary = ["userId": 1, "id": 11, "title": "Twitter ok", "body": "I think not"]
+            as [String: Any]
+
         if let jsonData = try? JSONSerialization.data(withJSONObject: dictionary, options: []) {
-            
-            let url = NSURL(string: "http://jsonplaceholder.typicode.com/posts")!
-            let request = NSMutableURLRequest(url: url as URL)
-            
+
+            let urll = NSURL(string: "http://jsonplaceholder.typicode.com/posts")!
+            let request = NSMutableURLRequest(url: urll as URL)
+
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpBody = jsonData
-            
+
             let task = URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
                 if error != nil {
-                    print(error?.localizedDescription)
+//                    print(error?.localizedDescription)
                     return
                 }
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
-                    
+                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
+                        as? NSDictionary
+
                     if let parseJson = json {
 //                        let result: String = parseJson["success"] as! String;
                         print("result: \(String(describing: response))")
@@ -50,12 +51,13 @@ class RequestsViewController: UIViewController {
             }
             task.resume()
         }
-        
     }
-    
+
     @IBAction func download() {
         // получить папку documents симулятора
-        let documentsUrl: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first as! URL
+
+        let documentsUrl: URL = FileManager.default.urls(for:
+            .documentDirectory, in: .userDomainMask).first ?? URL(fileURLWithPath: "")
 
         // название файла который мы будем сохранять
         let destinationFileUrl = documentsUrl.appendingPathComponent("downloadFile.jpg")
@@ -64,7 +66,8 @@ class RequestsViewController: UIViewController {
 
         // создание сессии
         let sessionConfig = URLSessionConfiguration.default
-        let session = URLSession(configuration: sessionConfig, delegate: self, delegateQueue: OperationQueue.main)
+        let session = URLSession(configuration: sessionConfig, delegate: self,
+                                 delegateQueue: OperationQueue.main)
 
         let request = URLRequest(url: fileUrl!)
 
@@ -78,49 +81,51 @@ class RequestsViewController: UIViewController {
                     try FileManager.default.copyItem(at: tempLocalUrl, to: destinationFileUrl)
                     // remove downloaded file
 //                    try FileManager.default.removeItem(at: destinationFileUrl)
-                } catch (let writeError) {
+                } catch let writeError {
                     print("Error creating a file \(destinationFileUrl) : \(writeError)")
                 }
             } else {
-                print("Error took place with downloading a file. Error description: %@", error?.localizedDescription)
+//                print("Error took place with downloading a file. Error description: %@",
+//                      error?.localizedDescription)
             }
         }
         task.resume()
     }
-    
 }
 
 // URLSessionDownloadDelegate - можно отслеживать процесс скачивания
 extension RequestsViewController: URLSessionDownloadDelegate {
-    
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask,
+                    didFinishDownloadingTo location: URL) {
         print("finished")
     }
-    
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask,
+                    didWriteData bytesWritten: Int64, totalBytesWritten: Int64,
+                    totalBytesExpectedToWrite: Int64) {
+
         print("bytesWritten \(bytesWritten), totalBytesExpectedToWrite \(totalBytesExpectedToWrite)")
     }
 }
 
 extension RequestsViewController: UITextFieldDelegate {
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("\(String(describing: textField.text))")
-        
-        if let str = textField.text, let number = Int(str) {
+
+        if let string = textField.text, let number = Int(string) {
             print(number)
-            var url = URL(string: Constants.Networking.posts)
-            url?.appendPathComponent("\(number)")
-            
-            if let getURL = url {
-                RequestManager.get(url: getURL)
+            var urll = URL(string: Constants.Networking.posts)
+            urll?.appendPathComponent("\(number)")
+
+            if let getURL = urll {
+                RequestManager.getUrl(urll: getURL)
             }
         }
         textField.text = nil
         textField.resignFirstResponder() // убрать клавиатуру
-        
+
         return true
     }
 }
-
-
