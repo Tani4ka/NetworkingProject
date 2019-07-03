@@ -16,6 +16,7 @@ protocol UserTableViewCellDelegate: class {
 class UserTableViewCell: UITableViewCell {
 
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var userId: UILabel!
     var indexPath: IndexPath?
     weak var delegate: UserTableViewCellDelegate?
     

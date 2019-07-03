@@ -48,7 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     class var viewContext: NSManagedObjectContext {
-        
         // swiftlint: next force_cast
         //        return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         // swiftlint: previous force_cast
@@ -57,6 +56,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Could not determine appDelegate.")
         }
         return delegate.persistentContainer.viewContext // viewContext - main queue
+    }
+    
+    class var dbPersistentContainer: NSPersistentContainer {
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("Could not determine appDelegate.")
+        }
+        return delegate.persistentContainer
     }
     
     // MARK: - Core Data stack

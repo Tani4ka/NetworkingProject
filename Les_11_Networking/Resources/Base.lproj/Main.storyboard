@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vQj-Fl-aE6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zgu-gv-OQU">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -22,18 +22,24 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserTableViewCellID" id="a9p-wz-RdA" customClass="UserTableViewCell" customModule="Les_11_Networking" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserTableViewCellID" rowHeight="93" id="a9p-wz-RdA" customClass="UserTableViewCell" customModule="Les_11_Networking" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a9p-wz-RdA" id="n1m-6N-lG0">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="92.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="jDI-Nc-Bbk">
-                                                    <rect key="frame" x="20.5" y="7" width="373" height="30"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="jDI-Nc-Bbk">
+                                                    <rect key="frame" x="20.5" y="31.5" width="373" height="30"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MiK-3t-fXe">
-                                                            <rect key="frame" x="0.0" y="0.0" width="215.5" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="159.5" height="30"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Id" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Qt-jh-EAv">
+                                                            <rect key="frame" x="178.5" y="0.0" width="37" height="30"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -54,6 +60,7 @@
                                                         </button>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstItem="4Qt-jh-EAv" firstAttribute="width" secondItem="jDI-Nc-Bbk" secondAttribute="width" multiplier="0.1" id="NLv-Vg-czn"/>
                                                         <constraint firstItem="ETS-7O-SBh" firstAttribute="width" secondItem="jDI-Nc-Bbk" secondAttribute="width" multiplier="0.16" id="dJa-Ne-eNq"/>
                                                         <constraint firstItem="T3b-yk-79p" firstAttribute="width" secondItem="jDI-Nc-Bbk" secondAttribute="width" multiplier="0.16" id="kQT-BU-JfA"/>
                                                     </constraints>
@@ -67,16 +74,22 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="UserNameLabel" destination="MiK-3t-fXe" id="r1y-DZ-3zN"/>
+                                            <outlet property="userId" destination="4Qt-jh-EAv" id="qIH-P8-6UE"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="e1m-KY-tHY">
+                                <rect key="frame" x="197" y="465" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Dxe-AG-rys" firstAttribute="centerY" secondItem="BGu-jj-cNf" secondAttribute="centerY" id="0hR-jd-Kl7"/>
                             <constraint firstItem="Dxe-AG-rys" firstAttribute="centerX" secondItem="BGu-jj-cNf" secondAttribute="centerX" id="G5v-Hx-fXD"/>
                             <constraint firstItem="Dxe-AG-rys" firstAttribute="height" secondItem="BGu-jj-cNf" secondAttribute="height" id="MvI-jC-50X"/>
+                            <constraint firstItem="e1m-KY-tHY" firstAttribute="centerX" secondItem="BGu-jj-cNf" secondAttribute="centerX" id="dDW-TL-XBi"/>
+                            <constraint firstItem="e1m-KY-tHY" firstAttribute="centerY" secondItem="BGu-jj-cNf" secondAttribute="centerY" id="eD0-gI-FDP"/>
                             <constraint firstItem="Dxe-AG-rys" firstAttribute="width" secondItem="BGu-jj-cNf" secondAttribute="width" id="gKz-FC-H63"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BGu-jj-cNf"/>
@@ -85,6 +98,7 @@
                         <barButtonItem key="backBarButtonItem" title="Users" id="kML-pf-cFk"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="e1m-KY-tHY" id="suQ-8Q-gPT"/>
                         <outlet property="tableView" destination="Dxe-AG-rys" id="4va-Za-BDF"/>
                     </connections>
                 </viewController>

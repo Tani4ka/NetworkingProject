@@ -116,7 +116,7 @@ class RequestManager {
             } else if let jsonData = data ,
                 let getResponse = response as? HTTPURLResponse,
                 getResponse.statusCode == 200 {
-                print("Data: \(jsonData)")
+//                print("Data: \(jsonData)")
 
                 // если в do try будет ошибка то код перепрыгнет в catch не выполняя следующие строки
                 do {

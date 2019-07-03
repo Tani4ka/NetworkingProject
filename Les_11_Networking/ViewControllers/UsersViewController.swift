@@ -11,31 +11,56 @@ import UIKit
 class UsersViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-
-    private var users: [User] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    //    private var users: [User] = [] {
+//        didSet {
+//            tableView.reloadData()
+//        }
+//    }
+    private var users: [User] = []
 
      // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        activityIndicator.startAnimating()  // or in storyboard
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.tableFooterView = UIView()
+        
+        initUserModels()
     }
 
      // MARK: - LifeCycle
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        RequestManager.getUsers { (getUsers) in
-
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        RequestManager.getUsers { (getUsers) in
+//
+//            DispatchQueue.main.async {
+//                self.users = getUsers
+//            }
+//        }
+//    }
+    
+    func initUserModels() {
+        DataManager().getUsers { (getUsers) in
+            self.users = getUsers
             DispatchQueue.main.async {
-                self.users = getUsers
+                self.tableView.reloadData()
+                self.activityIndicator.stopAnimating()
+//                self.activityIndicator.isHidden = true  // or in storyboard
             }
         }
+        
+//        RequestManager.getUsers { (getUsers) in
+//            self.users = getUsers
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//                self.activityIndicator.stopAnimating()
+//            }
+//        }
     }
 }
 
@@ -51,6 +76,7 @@ extension UsersViewController: UserTableViewCellDelegate, UITableViewDelegate, U
             as! UserTableViewCell // swiftlint:disable:this force_cast
 
         cell.userNameLabel.text = users[indexPath.row].name
+        cell.userId.text = String(users[indexPath.row].id)
         cell.indexPath = indexPath
         cell.delegate = self
 
@@ -62,7 +88,7 @@ extension UsersViewController: UserTableViewCellDelegate, UITableViewDelegate, U
             "postsViewControllerID") as? PostsViewController {
 
             postsVC.user = users[indexPath?.row ?? 0]
-            postsVC.title = "Posts " + users[indexPath?.row ?? 0].name!
+            postsVC.title = "Posts " + users[indexPath?.row ?? 0].name
 
             navigationController?.pushViewController(postsVC, animated: true)
         }
@@ -73,7 +99,7 @@ extension UsersViewController: UserTableViewCellDelegate, UITableViewDelegate, U
             "AlbumsViewControllerID") as? AlbumsViewController {
 
             albumsVC.user = users[indexPath?.row ?? 0]
-            albumsVC.title = "Albums " + users[indexPath?.row ?? 0].name!
+            albumsVC.title = "Albums " + users[indexPath?.row ?? 0].name
 
             navigationController?.pushViewController(albumsVC, animated: true)
         }

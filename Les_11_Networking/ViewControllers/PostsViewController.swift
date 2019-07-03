@@ -12,12 +12,13 @@ class PostsViewController: UIViewController {
 
     @IBOutlet weak var postsTableView: UITableView!
 
-    private var posts: [Post] = [] {
-        didSet {
-            postsTableView.reloadData()
-        }
-    }
-
+//    private var posts: [Post] = [] {
+//        didSet {
+//            postsTableView.reloadData()
+//        }
+//    }
+    private var posts: [Post] = []
+    
     public var user: User?
 
      // MARK: - LifeCycle
@@ -26,16 +27,27 @@ class PostsViewController: UIViewController {
 
         postsTableView.delegate = self
         postsTableView.dataSource = self
+        
+        initPostsModels()
     }
 
      // MARK: - LifeCycle
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        RequestManager.getPosts(with: user?.id ?? 0) { (getPosts) in
-            DispatchQueue.main.async {
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        RequestManager.getPosts(with: user?.id ?? 0) { (getPosts) in
+//            DispatchQueue.main.async {
 //                print(getPosts.count)
-                self.posts = getPosts
+//                self.posts = getPosts
+//            }
+//        }
+//    }
+    
+    func initPostsModels() {
+        DataManager().getPosts(with: user?.id ?? 0) { (getPosts) in
+            self.posts = getPosts
+            DispatchQueue.main.async {
+                self.postsTableView.reloadData()
             }
         }
     }
@@ -53,8 +65,9 @@ extension PostsViewController: UITableViewDataSource, UITableViewDelegate {
             "PostsViewControllerCellID", for: indexPath)
             as! PostsTableViewCell // swiftlint:disable:this force_cast
 
-        cell.postsLabel.text = posts[indexPath.row].title
-
+//        cell.postsLabel.text = posts[indexPath.row].title
+            cell.postsLabel.text = posts[indexPath.row].title
+        
         return cell
     }
 

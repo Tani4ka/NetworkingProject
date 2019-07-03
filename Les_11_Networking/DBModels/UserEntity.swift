@@ -9,7 +9,30 @@
 import Foundation
 import CoreData
 
+// Правильно разделять классы для работы с базой и UI, и конвертировать эти модели между собой,
+// чтобы обезопасить UI от модели напрямую работающей с базой данных
+// класс для работы с UI
 class UserEntity: NSManagedObject {
+    
+    // getAllUsers
+    class func getAllUsers(context: NSManagedObjectContext) throws -> [UserEntity] {
+        
+        let request: NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
+        
+        let sortDescriptor = NSSortDescriptor(key: #keyPath(UserEntity.id), ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+    // or
+    //        request.sortDescriptors = [NSSortDescriptor(key: "text", ascending: true, selector:
+    //            #selector(NSString.localizedStandardCompare(_:)))]
+    
+        do {
+            let users = try context.fetch(request)
+//            print(users)
+            return users
+        } catch {
+            throw error
+        }
+    }
     
     // find()
     class func find(id: Int, context: NSManagedObjectContext) throws -> UserEntity {
@@ -32,7 +55,8 @@ class UserEntity: NSManagedObject {
         // throws - функция при вызове если что вернет ошибку, нужно будет указывать try в doCatch
         
         let request: NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "id == %d", user.id!)
+        
+        request.predicate = NSPredicate(format: "id == %d", user.id)
         // "name in %@", ["Tanya", "Vasya", "Sasha"] - найдет имя или Tanya или Vasya или Sasha
         // "id == %d && name == %@", user.id!, user.name!  // "id in %@", [4,5,6]"
         
@@ -48,9 +72,10 @@ class UserEntity: NSManagedObject {
             throw error // throw error - завершает выполнение функции и выводит ошибку
         }
         
+        // создаем Entity, если не нашли в базе
         let userEntity = UserEntity(context: context)
         userEntity.email = user.email
-        userEntity.id = Int64(user.id!)
+        userEntity.id = Int64(user.id)
         userEntity.name = user.name
         userEntity.userName = user.username
         
