@@ -1,8 +1,12 @@
 disabled_rules: # rule identifiers to exclude from running
-  # - colon
+# Colons ":" should be next to the identifier when specifying a type and next to the key 
+  # - colon 
+# There should be no space before and one after any comma
   # - comma
+ # if, for, guard, switch, while, and catch shouldn't unnecessarily wrap arguments
   # - control_statement
-  - trailing_whitespace
+
+  # - trailing_whitespace
   # - identifier_name
   # - type_name
   # - force_cast
@@ -10,7 +14,8 @@ disabled_rules: # rule identifiers to exclude from running
   # - cyclomatic_complexity
   # - function_body_length
 
-opt_in_rules: # some rules are only opt-in
+opt_in_rules: # some rules are only opt-
+# Prefer checking isEmpty over comparing count to zero.
   - empty_count
   # - empty_string
   # - missing_docs
@@ -31,6 +36,7 @@ excluded: # paths to ignore during linting. Takes precedence over `included`.
   # - Pods/RxSwift/RxSwift/Schedulers/CurrentThreadScheduler.
 
 analyzer_rules: # Rules run by `swiftlint analyze` (experimental)
+# Instance variables and functions should be explicitly accessed with '.self'
   - explicit_self
 
 # configurable rules can be customized from this configuration file

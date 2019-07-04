@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F132" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CommentsEntity" representedClassName=".CommentsEntity" syncable="YES" codeGenerationType="category">
+        <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="postId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="postTheme" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PostEntity" inverseName="comments" inverseEntity="PostEntity" syncable="YES"/>
+    </entity>
     <entity name="PostEntity" representedClassName=".PostEntity" syncable="YES" codeGenerationType="category">
         <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CommentsEntity" inverseName="postTheme" inverseEntity="CommentsEntity" syncable="YES"/>
         <relationship name="userOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserEntity" inverseName="posts" inverseEntity="UserEntity" syncable="YES"/>
     </entity>
     <entity name="UserEntity" representedClassName=".UserEntity" syncable="YES" codeGenerationType="category">
@@ -14,7 +23,8 @@
         <relationship name="posts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PostEntity" inverseName="userOwner" inverseEntity="PostEntity" syncable="YES"/>
     </entity>
     <elements>
+        <element name="PostEntity" positionX="185.390625" positionY="-8.87109375" width="128" height="118"/>
         <element name="UserEntity" positionX="-63" positionY="-18" width="128" height="118"/>
-        <element name="PostEntity" positionX="185.390625" positionY="-8.87109375" width="128" height="103"/>
+        <element name="CommentsEntity" positionX="396.77734375" positionY="-22.36328125" width="128" height="133"/>
     </elements>
 </model>

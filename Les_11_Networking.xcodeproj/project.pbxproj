@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5639029D22CDF6A200014B0C /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5639029C22CDF6A200014B0C /* CommentsTableViewCell.swift */; };
+		5639029F22CE08E400014B0C /* CommentsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5639029E22CE08E400014B0C /* CommentsEntity.swift */; };
 		563CDBF222B3E881009C0C41 /* AlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563CDBF122B3E881009C0C41 /* AlbumsViewController.swift */; };
 		563D166D22C91D930046B12B /* PostEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563D166C22C91D930046B12B /* PostEntity.swift */; };
 		563D167022C93FD60046B12B /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563D166F22C93FD60046B12B /* DataManager.swift */; };
@@ -32,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5639029C22CDF6A200014B0C /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
+		5639029E22CE08E400014B0C /* CommentsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsEntity.swift; sourceTree = "<group>"; };
 		563CDBF122B3E881009C0C41 /* AlbumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsViewController.swift; sourceTree = "<group>"; };
 		563D166C22C91D930046B12B /* PostEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEntity.swift; sourceTree = "<group>"; };
 		563D166F22C93FD60046B12B /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -149,6 +153,7 @@
 			children = (
 				56427A4D22AFB6880069CBD9 /* UserTableViewCell.swift */,
 				56427A5122AFF41A0069CBD9 /* PostsTableViewCell.swift */,
+				5639029C22CDF6A200014B0C /* CommentsTableViewCell.swift */,
 				564CFAA722B5642700E9C2D1 /* PhotosTableViewCell.swift */,
 			);
 			path = Views;
@@ -167,6 +172,7 @@
 			children = (
 				5643C03822C66C4500455344 /* UserEntity.swift */,
 				563D166C22C91D930046B12B /* PostEntity.swift */,
+				5639029E22CE08E400014B0C /* CommentsEntity.swift */,
 			);
 			path = DBModels;
 			sourceTree = "<group>";
@@ -271,6 +277,7 @@
 				563CDBF222B3E881009C0C41 /* AlbumsViewController.swift in Sources */,
 				56427A4E22AFB6880069CBD9 /* UserTableViewCell.swift in Sources */,
 				5643C03922C66C4500455344 /* UserEntity.swift in Sources */,
+				5639029D22CDF6A200014B0C /* CommentsTableViewCell.swift in Sources */,
 				56422CB422A7D966003363AB /* UserModels.swift in Sources */,
 				56427A5022AFF05C0069CBD9 /* PostsViewController.swift in Sources */,
 				56422C9A22A7B6C0003363AB /* AppDelegate.swift in Sources */,
@@ -278,6 +285,7 @@
 				56427A5222AFF41A0069CBD9 /* PostsTableViewCell.swift in Sources */,
 				564948C822BD14500098C268 /* RequestsViewController.swift in Sources */,
 				564CFAA222B557AE00E9C2D1 /* PhotosViewController.swift in Sources */,
+				5639029F22CE08E400014B0C /* CommentsEntity.swift in Sources */,
 				563D167022C93FD60046B12B /* DataManager.swift in Sources */,
 				56422CAF22A7D855003363AB /* Post.swift in Sources */,
 				564CFAA422B560AE00E9C2D1 /* ImageModel.swift in Sources */,

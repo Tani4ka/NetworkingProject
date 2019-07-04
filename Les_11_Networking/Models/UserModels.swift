@@ -58,11 +58,19 @@ class UserCompany: Codable {
 }
 
 class Comment: Codable {
-    var postId: Int?
-    var id: Int?
-    var name: String?
-    var email: String?
-    var body: String?
+    var postId: Int
+    var id: Int
+    var name: String
+    var email: String
+    var body: String
+    
+    init(commentsEntity: CommentsEntity) {
+        self.postId = Int(commentsEntity.postId)
+        self.id = Int(commentsEntity.id)
+        self.name = commentsEntity.name ?? ""
+        self.email = commentsEntity.email ?? ""
+        self.body = commentsEntity.body ?? ""
+    }
 }
 
 class Albums: Codable {

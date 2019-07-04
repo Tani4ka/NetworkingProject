@@ -13,20 +13,20 @@ import CoreData
 // чтобы обезопасить UI от модели напрямую работающей с базой данных
 // класс для работы с базой
 class DataManager {
-    
-    // getUsers - запрашивает юзеров с базы или с сервера
+
+    // getUsers() - запрашивает юзеров с базы или с сервера
     func getUsers(_ complitionHandler: @escaping ([User]) -> Void) {
-        
+
 //        DispatchQueue.main.async {
-        
+
             // запрашиваем данные из базы если они есть
             let userEntities = try? UserEntity.getAllUsers(context: AppDelegate.viewContext)
-            
+
             // конвертируем эти данные в модели User-ов
             if let  users = userEntities,
                 !users.isEmpty {   // users.count > 0
                 var returnedUsersArray: [User] = []
-                
+
                 for userEntity in users {
                     // в User нужно создать инициализатор с UserEntity и там все это конвертировать,
                     // тогда сдесь мы просто вызовем инициализатор let user = User(...) и все
@@ -35,16 +35,16 @@ class DataManager {
 //                    user.name = userEntity.name
 //                    user.username = userEntity.userName
 //                    user.email = userEntity.email
-                    
+
                     returnedUsersArray.append(user)
                 }
                 // возвращаем модели User-ов вне
                 complitionHandler(returnedUsersArray)
             } else { // если данных в базе нету, то мы делаем запрос на сервер
-                
+
                 // RequestManager.getUsers(completionHandler: completionHandleer) // в этом случае
                 // ф-цию getUsers будет обрабатывать ф-ция выше getUsers и данные не сохраняться в базу
-        
+
                 // сервер возвращает нам юзеров
                 RequestManager.getUsers { (users) in
                     // выносим на background context, так как с срвера загружаеться с задержкой.
@@ -62,22 +62,24 @@ class DataManager {
             }
 //        }
     }
-    
+
+    // getPosts()
     func getPosts(with userId: Int, _ complitionHandler: @escaping ([Post]) -> Void) {
-        
+
         let postEntities = try? PostEntity.find(userId: userId, context: AppDelegate.viewContext)
-        
+
         if let posts = postEntities,
             !posts.isEmpty {
+
             var returnedPostsArray: [Post] = []
-            
+
             for postEntity in posts {
                 let post = Post()
                 post.id = Int(postEntity.id)
                 post.title = postEntity.title
                 post.body = postEntity.body
-                print(post.id!)
-                
+//                print(post.id!)
+
                 returnedPostsArray.append(post)
             }
 //            returnedPostsArray.sorted(by: { (post1: Post, post2: Post) -> Bool in
@@ -93,10 +95,41 @@ class DataManager {
                         }
                         try? context.save()
                         complitionHandler(posts)
-                        
+
                     })
                 }
             })
+        }
+    }
+
+    // get Comments()
+    func getComments(with postId: Int, _ complitionHandler: @escaping ([Comment]) -> Void) {
+
+        let commentsEntity = try? CommentsEntity.findComments(postId: postId,
+                                                              context: AppDelegate.viewContext)
+        if let comments = commentsEntity,
+            !comments.isEmpty {
+
+            var returnedCommentsArray: [Comment] = []
+
+            for commentsEntity in comments {
+                let comment = Comment(commentsEntity: commentsEntity)
+//                 print("DataManager getComments: \(comment.id)")
+                returnedCommentsArray.append(comment)
+            }
+            complitionHandler(returnedCommentsArray)
+        } else {
+            RequestManager.getComments(with: postId) { (comments) in
+                DispatchQueue.main.async {
+                    AppDelegate.dbPersistentContainer.performBackgroundTask({ (context) in
+                        for comment in comments {
+                            _ = try? CommentsEntity.findOrCreate(comment: comment, context: context)
+                        }
+                        try? context.save()
+                        complitionHandler(comments)
+                    })
+                }
+            }
         }
     }
 }

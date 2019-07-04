@@ -10,24 +10,40 @@ import Foundation
 import CoreData
 
 class PostEntity: NSManagedObject {
-    
-    // getAllPosts
-    class func getAllPosts(context: NSManagedObjectContext) throws -> [PostEntity] {
+
+    // getAllPosts()
+//    class func getAllPosts(context: NSManagedObjectContext) throws -> [PostEntity] {
+//
+//        let request: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
+//        do {
+//            let posts = try context.fetch(request)
+//            return posts
+//        } catch {
+//            throw error
+//        }
+//    }
+
+    // findPost() - ищем в базе posts по id
+    class func findPost(id: Int, context: NSManagedObjectContext) throws -> PostEntity {
 
         let request: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %d", id)
+
         do {
             let posts = try context.fetch(request)
-            return posts
+            assert(posts.count == 1, "There are few users related to one identifier")
+//            print("findPost from id: \(posts)")
+            return posts[0]
         } catch {
             throw error
         }
     }
-    
-    // find
+
+    // find()
     class func find(userId: Int, context: NSManagedObjectContext) throws -> [PostEntity] {
-        
+
         let userEntity = try? UserEntity.find(id: userId, context: context)
-        
+
         guard let posts = userEntity?.posts as? Set<PostEntity> else {
             return []
         }
@@ -35,10 +51,10 @@ class PostEntity: NSManagedObject {
         let postsArray = Array(sortedPost)
         return postsArray
     }
-    
-    // findOrCreate
+
+    // findOrCreate()
     class func findOrCreate(post: Post, context: NSManagedObjectContext) throws -> PostEntity {
-        
+
         let request: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
         request.predicate = NSPredicate(format: "id == %d", post.id!)
 
@@ -51,14 +67,14 @@ class PostEntity: NSManagedObject {
         } catch {
             throw error
         }
-        
+
         let postEntity = PostEntity(context: context)
         postEntity.title = post.title
         postEntity.body = post.body
         postEntity.id = Int64(post.id!)
         // важно чтобы PostEntity и UserEntity были на одном контексте
         postEntity.userOwner = try? UserEntity.find(id: post.userId!, context: context)
-        
+
         return postEntity
     }
 }

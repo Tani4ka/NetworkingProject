@@ -19,13 +19,13 @@ class UserTableViewCell: UITableViewCell {
     @IBOutlet weak var userId: UILabel!
     var indexPath: IndexPath?
     weak var delegate: UserTableViewCellDelegate?
-    
+
     @IBAction func postsAction(_ sender: Any) {
         delegate?.postsDidTap(indexPath: indexPath)
 //        print("postsDidTap in cell")
-        
+
     }
-    
+
     @IBAction func albumsAction(_ sender: Any) {
         delegate?.albumsDidTap(indexPath: indexPath)
 //        print("albumsDidTap in cell")

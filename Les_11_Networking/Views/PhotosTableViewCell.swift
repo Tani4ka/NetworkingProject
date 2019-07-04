@@ -9,11 +9,11 @@
 import UIKit
 
 class PhotosTableViewCell: UITableViewCell {
-    
+
     @IBOutlet weak var photosView: UIImageView!
     @IBOutlet weak var photosLabel: UILabel!
     @IBOutlet weak var activityView: UIActivityIndicatorView!
-    
+
     var imagePath: String? {
         didSet {
             activityView.startAnimating()
@@ -21,7 +21,7 @@ class PhotosTableViewCell: UITableViewCell {
             if let path = imagePath {
                 DispatchQueue.global(qos: .userInitiated).async {
                     let imageModel = ImageModel(imagePath: path)
-                    
+
                     if path == self.imagePath {
                         DispatchQueue.main.async {
                             self.photosView.image = imageModel.image

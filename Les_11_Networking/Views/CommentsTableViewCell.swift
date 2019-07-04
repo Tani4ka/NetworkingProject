@@ -1,17 +1,19 @@
 //
-//  PostsTableViewCell.swift
+//  CommentsTableViewCell.swift
 //  Les_11_Networking
 //
-//  Created by Tetiana Hranchenko on 6/11/19.
+//  Created by Tetiana Hranchenko on 7/4/19.
 //  Copyright © 2019 Canux Corporation. All rights reserved.
 //
 
 import UIKit
 
-class PostsTableViewCell: UITableViewCell {
+class CommentsTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var postIdLabel: UILabel!
     @IBOutlet weak var idLabel: UILabel!
-    @IBOutlet weak var postsLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var bodyLabel: UILabel!
 
     override func awakeFromNib() {

@@ -18,7 +18,7 @@ class PostsViewController: UIViewController {
 //        }
 //    }
     private var posts: [Post] = []
-    
+
     public var user: User?
 
      // MARK: - LifeCycle
@@ -27,7 +27,7 @@ class PostsViewController: UIViewController {
 
         postsTableView.delegate = self
         postsTableView.dataSource = self
-        
+
         initPostsModels()
     }
 
@@ -42,7 +42,7 @@ class PostsViewController: UIViewController {
 //            }
 //        }
 //    }
-    
+
     func initPostsModels() {
         DataManager().getPosts(with: user?.id ?? 0) { (getPosts) in
             self.posts = getPosts
@@ -65,9 +65,12 @@ extension PostsViewController: UITableViewDataSource, UITableViewDelegate {
             "PostsViewControllerCellID", for: indexPath)
             as! PostsTableViewCell // swiftlint:disable:this force_cast
 
-//        cell.postsLabel.text = posts[indexPath.row].title
-            cell.postsLabel.text = posts[indexPath.row].title
-        
+        if let postId = posts[indexPath.row].id {
+            cell.idLabel.text = String(postId)
+        }
+        cell.postsLabel.text = posts[indexPath.row].title
+        cell.bodyLabel.text = posts[indexPath.row].body
+
         return cell
     }
 
@@ -81,7 +84,7 @@ extension PostsViewController: UITableViewDataSource, UITableViewDelegate {
             "commentsViewControllerID") as? CommentsViewController {
 
             commentsVC.title = "Comments View Controller"
-            commentsVC.postID =  posts[indexPath.row].id
+            commentsVC.postIdentifier =  posts[indexPath.row].id
 
             navigationController?.pushViewController(commentsVC, animated: true)
         }

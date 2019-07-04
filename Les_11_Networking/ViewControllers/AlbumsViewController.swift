@@ -61,6 +61,11 @@ extension AlbumsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.text = albums[indexPath.row].title
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.font = UIFont.systemFont(ofSize: 17.0)
+        if let id = albums[indexPath.row].id {
+           cell.detailTextLabel?.text = String(id)
+        }
+        cell.detailTextLabel?.numberOfLines = 0
+        cell.detailTextLabel?.font = UIFont.boldSystemFont(ofSize: 12.0)
 
         return cell
     }

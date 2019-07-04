@@ -46,27 +46,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
-    
+
     class var viewContext: NSManagedObjectContext {
         // swiftlint: next force_cast
         //        return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         // swiftlint: previous force_cast
-        
+
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError("Could not determine appDelegate.")
         }
         return delegate.persistentContainer.viewContext // viewContext - main queue
     }
-    
+
     class var dbPersistentContainer: NSPersistentContainer {
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError("Could not determine appDelegate.")
         }
         return delegate.persistentContainer
     }
-    
+
     // MARK: - Core Data stack
-    
+
     lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation
@@ -81,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // fatalError() causes the application to generate a crash log and terminate.
                 // You should not use this function in a shipping application,
                 // although it may be useful during development.
-                
+
                 /*
                  Typical reasons for an error here include:
                  * The parent directory does not exist, cannot be created, or disallows writing.
@@ -96,9 +96,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         return container
     }()
-    
+
     // MARK: - Core Data Saving support
-    
+
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
@@ -114,5 +114,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
+
 }

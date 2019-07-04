@@ -12,7 +12,7 @@ class UsersViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+
     //    private var users: [User] = [] {
 //        didSet {
 //            tableView.reloadData()
@@ -28,7 +28,7 @@ class UsersViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
-        
+
         initUserModels()
     }
 
@@ -43,7 +43,7 @@ class UsersViewController: UIViewController {
 //            }
 //        }
 //    }
-    
+
     func initUserModels() {
         DataManager().getUsers { (getUsers) in
             self.users = getUsers
@@ -53,7 +53,7 @@ class UsersViewController: UIViewController {
 //                self.activityIndicator.isHidden = true  // or in storyboard
             }
         }
-        
+
 //        RequestManager.getUsers { (getUsers) in
 //            self.users = getUsers
 //            DispatchQueue.main.async {
