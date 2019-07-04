@@ -78,7 +78,7 @@ class DataManager {
                 post.id = Int(postEntity.id)
                 post.title = postEntity.title
                 post.body = postEntity.body
-                print(post.id!)
+//                print(post.id!)
 
                 returnedPostsArray.append(post)
             }
@@ -114,7 +114,7 @@ class DataManager {
 
             for commentsEntity in comments {
                 let comment = Comment(commentsEntity: commentsEntity)
-                 print(comment.id)
+//                 print(comment.id)
                 returnedCommentsArray.append(comment)
             }
             complitionHandler(returnedCommentsArray)
